@@ -1,0 +1,27 @@
+{
+  "name": "azure-function-app",
+  "version": "1.0.0",
+  "description": "Azure Function App with ES modules",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests specified\" && exit 1"
+  },
+  "keywords": [
+    "azure",
+    "functions",
+    "serverless"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@azure/functions": "^4.0.0"
+  },
+  "devDependencies": {
+    "azure-functions-core-tools": "^4.x"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
