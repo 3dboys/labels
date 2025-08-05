@@ -1,0 +1,81 @@
+restoreWindows - uncheck
+
+Can you help me fix git? I think it can't log into the remote repository on Github to push my latest changes.
+
+Can you provide me a claude.md file that I could use to help generate a new project.  The project will be an Azure Function app that uses Javascript for the framework.  We want to use the latest ES modules syntax.
+
+Can you create me an Azure Function App that has two httpTriggered functions?   The functions can be just thing1 and thing2 for now.   They should both just return a message like "Hello from thing x"
+
+how do we run this azure function local?
+
+Awesome. That is working. Now, we can remove thing2 from the project
+
+Excellent. now we need to add a new function called printLabel.  It will need to use PdfKit to print lables on a page.  The page will be a standard 8 1/2 x 11" and consists of 42 lables on a page.  Each label is a round 1 1/4"  There are 6 columns and 7 rows on the page.   For now, we could just print "boo" in each lable  (We will change that in the future)
+
+How does Azure functions determine what functions are available?  I thought it wanted a separate folder for each function, but I see we are not doing that.
+
+Would it break anything if we changed the project to have a separate folder for each function?   That seems cleaner and easier to add new functions in the future to me.
+
+The reason the task is still running each time you try to start it is because you are opening a new Copilot session in the terminal each time.   Is there a way you can reusing the one that you already started?
+
+Do we need an index file, like a barrel file to export each of the functions?
+
+Nice.  For the columns, there should be a 1/8" space between each lable
+
+Lets change the printLable to post only method that accepts a json object with properties to specify some values. For example, we need a value to add the number of units to offset from the top of the page.
+
+since we added the leftPageOffset property, we should change the offsetUnits property to topPageOffset
+
+This is working nice.  Now for a little twist.  I would like to pass an additional parameter that is an array.  I will give you an example.   The code needs to read the array and use it to print the lable.  It should print the month as the first line of the lable text.   The year should be the second line.  It should print in the color specified in the color property.  Finally, it should print the number of lables specified in the count property.   If the count doesn't add up to the total number of labels allowed on the page (42), the final labels should not be printed.
+
+[
+    {
+        "month": "Mar",
+        "year": "26",
+        "count": 18,
+        "color": "red"
+    },
+    {
+        "month": "Apr",
+        "year": "26",
+        "count": 12,
+        "color": "green"
+    }
+]
+
+Wow, you knocked that one out of the park (a good thing).  Now, can we add another property to the input that specifies what label to start printing with.   For example, it will normally be 1.  However, if the last time I printed lables, I only printed 18 lables and now I am starting a fresh print, I  want the first label to start where label 19 would print.
+
+You nailed it!  Now, can we add a monthFontSize and yearFontSize property so the user can determine how big they want th text to be for each lable?   Also, we should add a tick or apostrophe in front of the year to make it more clear this is a year.
+
+Looking great!  It appears we need to be able to specify some margin between the month and the  year.   Without it, the Year is printing over the month a little bit.
+
+Loving it! Lets add another property for fontBold and default it to true
+
+The text within each lable does not appear centered from top to bottom.  Should we add another property to offset the vertical position of the text in the label?
+
+Here is the current version of the example JSON that Copilot is providing.
+{
+  "topPageOffset": 0,
+  "leftPageOffset": 0,
+  "showBorders": true,
+  "monthFontSize": 14,
+  "yearFontSize": 10,
+  "lineSpacing": 6,
+  "fontBold": true,
+  "textVerticalOffset": -2,
+  "startLabelPosition": 1,
+  "labels": [
+    {
+      "month": "Mar",
+      "year": "26",
+      "count": 18,
+      "color": "red"
+    }
+  ]
+}
+
+Very Sweet!  That vertical offset for the lables worked great!
+
+I hate 1 letter variable names, even for short iterations.  Can you update anywhere in the code that is using a 1 character variable name to a meaningful variable name?
+
+When I change the monthFontSize variable to 26, the font looks bigger, but it is truncating the text. However, it seems there is plenty of room on each side of the text, so I am not clear why the text is being truncated. Instead of seeing "Mar" for March, "I am seeing "Ma", and the "y" is missing.
